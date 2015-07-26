@@ -1,5 +1,33 @@
-class RegisteredApplicationsController < ApplicationController
+class RegisteredApplicationsController < ApplicationController  
   def index
-    @Applications = RegisteredApplication.all    
+    @registered_applications = current_user.registered_applications.all
+  end
+
+  def new
+    @registered_application = RegisteredApplication.new
+  end
+
+  def show
+    @user = current_user
+    @registered_application = @user.registered_applications.find(params[:id])
+  end
+
+  def create
+    @user = current_user
+    @registered_application = current_user.registered_applications.build(app_params)
+    @registered_application.user = @user
+
+    if @registered_application.save
+      flash[:notice] = 'Topic was created.'
+      redirect_to registered_applications_path(current_user)
+    else
+      flash[:error] = 'There was an error saving the topic. Please try again.'
+    end
+  end
+
+  private
+
+  def app_params
+    params.require(:registered_application).permit(:name, :url)
   end
 end

@@ -1,0 +1,11 @@
+.container
+  %h2 Registered Applications
+  - @registered_applications.each do |app|
+    .media
+      .media-body
+        %h4
+          %b= link_to app.name, app.url
+%div
+  %br
+    %b Register a new application
+    = render partial: 'form', locals: {user: @user, registered_application: @registered_application}

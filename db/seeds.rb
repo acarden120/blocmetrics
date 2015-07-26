@@ -25,13 +25,13 @@ admin.save!
 
 
 # Create an standard test user
-admin = User.new(
+test2 = User.new(
  name:     'Test2 User2',
  email:    'test2@example.com',
  password: 'abc654321',
 )
-admin.skip_confirmation!
-admin.save!
+test2.skip_confirmation!
+test2.save!
 
 
 # Added 26th July, 2015
@@ -58,6 +58,7 @@ member.save!
 
 # Create registered applications
 example_app = RegisteredApplication.create!(
+  user:        test2,
   name:        'Example Name',
   url:         'http://example.com'
   )
@@ -70,10 +71,3 @@ example_app.save!
   )
 end
 registered_applications = RegisteredApplication.all
-
-# Create events
-example_event = Event.create!(
-  registered_application:        example_app,
-  name:                          'view'
-  )
-example_event.save!
