@@ -1,0 +1,5 @@
+%h4= @registered_application.name
+= link_to "New Bookmark", new_topic_bookmark_path(@topic, @bookmark), class: 'btn btn-success'
+= link_to "Delete", [@topic, @bookmark], method: :delete, class: 'btn btn-danger', data: {confirm: 'you sure playa?'}
+= link_to "Edit", edit_topic_bookmark_path(@topic, @bookmark), class: 'btn btn-success'
+= render partial: 'likes/like', locals: { bookmark: @bookmark }
