@@ -13,14 +13,17 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'sqlite3'
-  gem 'rspec-rails', '~> 3.0'
 end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+group :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara', '~> 2.4.4'
+end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml', '~> 4.0.6'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'devise'
-gem 'factory_girl_rails', '~> 4.0'
