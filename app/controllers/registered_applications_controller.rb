@@ -1,4 +1,6 @@
-class RegisteredApplicationsController < ApplicationController  
+class RegisteredApplicationsController < ApplicationController   
+  before_action :authenticate_user!
+
   def index
     @registered_applications = current_user.registered_applications.all
   end
@@ -20,6 +22,16 @@ class RegisteredApplicationsController < ApplicationController
     if @registered_application.save
       flash[:notice] = 'Topic was created.'
       redirect_to registered_applications_path(current_user)
+    else
+      flash[:error] = 'There was an error saving the topic. Please try again.'
+    end
+  end
+
+  def destroy
+    @registered_application = RegisteredApplication.find(params[:id])
+    if @registered_application.destroy
+      redirect_to registered_applications_path(current_user)
+      flash[:notice] = 'The application was deleted'
     else
       flash[:error] = 'There was an error saving the topic. Please try again.'
     end
