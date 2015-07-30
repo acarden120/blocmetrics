@@ -1,4 +1,4 @@
-class RegisteredApplicationsController < ApplicationController   
+class RegisteredApplicationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
