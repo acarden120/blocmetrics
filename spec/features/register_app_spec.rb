@@ -16,31 +16,28 @@ describe 'Add new application' do
       click_button 'Add'
 
       expect(current_path).to eq registered_applications_path(@user)
-      expect(page).to have_content('There was an error saving the application. Please try again.')
+      expect(page).to have_content('There was an error registering the application. Please try again.')
     end
   end
 
   describe 'Submit with valid data' do
     it 'it redirects to the application show page' do
-      fill_in 'Email', with: 'TestApp'
-      fill_in 'Password', with: 'http://www.testapp.com'
-      click_button 'Login'
-
-      expect(current_path).to eq registered_applications_path(@user)
-      expect(page).to have_content('Register a new application')
-    end
-  end
-
-=begin
-  describe 'Submit with duplicate url' do
-    it 'it redirects to the application show page' do
-      fill_in 'name', with: 'TestApp'
-      fill_in 'url', with: 'http://www.testapp.com'
+      fill_in 'registered_application_name', with: 'TestApp'
+      fill_in 'registered_application_url', with: 'http://www.testapp.com'
       click_button 'Add'
 
       expect(current_path).to eq registered_applications_path(@user)
       expect(page).to have_content('Register a new application')
     end
   end
-=end
+
+  describe 'Submit with duplicate url' do
+    it 'it displays a flash error message' do
+      fill_in 'registered_application_name', with: 'TestApp'
+      fill_in 'registered_application_url', with: 'http://www.testapp.com'
+      click_button 'Add'
+
+      expect(current_path).to eq registered_applications_path(@user)
+    end
+  end
 end

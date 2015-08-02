@@ -23,7 +23,7 @@ class RegisteredApplicationsController < ApplicationController
     if @registered_application.save
       flash[:notice] = 'Application was registered.'
     else
-      flash[:error] = 'There was an error saving the application. Please try again.'
+      flash[:error] = 'There was an error registering the application. Please try again.'
     end
     redirect_to registered_applications_path(current_user)
   end
@@ -34,7 +34,7 @@ class RegisteredApplicationsController < ApplicationController
       redirect_to registered_applications_path(current_user)
       flash[:notice] = 'The application was deleted'
     else
-      flash[:error] = 'There was an error saving the topic. Please try again.'
+      flash[:error] = 'There was an error registering the application. Please try again.'
     end
   end
 
