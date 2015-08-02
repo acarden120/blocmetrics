@@ -21,11 +21,11 @@ class RegisteredApplicationsController < ApplicationController
     @registered_application.user = @user
 
     if @registered_application.save
-      flash[:notice] = 'Topic was created.'
-      redirect_to registered_applications_path(current_user)
+      flash[:notice] = 'Application was registered.'
     else
-      flash[:error] = 'There was an error saving the topic. Please try again.'
+      flash[:error] = 'There was an error saving the application. Please try again.'
     end
+    redirect_to registered_applications_path(current_user)
   end
 
   def destroy

@@ -1,38 +1,46 @@
 require 'rails_helper'
 
-feature 'user adds registered application' do
+include Devise::TestHelpers
+
+describe 'Add new application' do
   before do
-    @user = create(:user)
+    @user = FactoryGirl.create(:user)
     visit new_user_session_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
-    click_button 'Sign in'
-    click_link 'My Registered Applications'
-    click_link 'Add application'
+    click_button 'Log in'
   end
 
-  scenario 'successfully' do
-    fill_in 'Name', with: 'Example'
-    fill_in 'Url', with: 'http://example.com'
-    click_button 'Save'
+  describe 'Submit with blank fields' do
+    it 'it remains on the current page and displays flash message' do
+      click_button 'Add'
 
-    expect(page).to have_content('Example')
-    expect(page).to have_content('http://example.com')
+      expect(current_path).to eq registered_applications_path(@user)
+      expect(page).to have_content('There was an error saving the application. Please try again.')
+    end
   end
 
-  scenario 'unsuccessfully with no name' do
-    fill_in 'Name', with: ''
-    fill_in 'Url', with: 'http://noname.com'
-    click_button 'Save'
+  describe 'Submit with valid data' do
+    it 'it redirects to the application show page' do
+      fill_in 'Email', with: 'TestApp'
+      fill_in 'Password', with: 'http://www.testapp.com'
+      click_button 'Login'
 
-    expect(page).to have_content('Error creating application. Please try again.')
+      expect(current_path).to eq registered_applications_path(@user)
+      expect(page).to have_content('Register a new application')
+    end
   end
 
-  scenario 'unsuccessfully with no url' do
-    fill_in 'Name', with: 'Name'
-    fill_in 'Url', with: ''
-    click_button 'Save'
+=begin
+  describe 'Submit with duplicate url' do
+    it 'it redirects to the application show page' do
+      fill_in 'name', with: 'TestApp'
+      fill_in 'url', with: 'http://www.testapp.com'
+      click_button 'Add'
 
-    expect(page).to have_content('Error creating application. Please try again.')
+      expect(current_path).to eq registered_applications_path(@user)
+      expect(page).to have_content('Register a new application')
+    end
   end
+=end
 end
