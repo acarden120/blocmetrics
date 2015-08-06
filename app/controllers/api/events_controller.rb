@@ -6,33 +6,15 @@ class API::EventsController < ApplicationController
   def create
     registered_application = RegisteredApplication.find_by(url: request.env['HTTP_ORIGIN'])
 
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-    puts "*********************************************"
-
     if !registered_application
       render json: "Unregistered application", status: :unprocessable_entity
     else
       @event = registered_application.events.new(event_params)
+      binding.pry
       if @event.save
-        puts "nothing to see here"
         render json: @event, status: :created
       else
-        render "There is something strange happening here."
-#        render @event.errors, status: :unprocessable_entity
+        render @event.errors, status: :unprocessable_entity
       end
     end
   end
@@ -46,6 +28,6 @@ class API::EventsController < ApplicationController
   private
 
   def event_params
-    params.permit(:event_name)
+    params.permit(:name)
   end
 end

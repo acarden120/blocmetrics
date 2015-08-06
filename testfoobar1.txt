@@ -161,7 +161,7 @@
 </header>
 
 <div id="container">
-  <h2>795: unexpected token at &#39;&#39;{event_name:bypass}&#39;&#39;</h2>
+  <h2>795: unexpected token at &#39;&#39;{event_name:foobar}&#39;&#39;</h2>
 
   
   
