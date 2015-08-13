@@ -21,6 +21,7 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'capybara', '~> 2.4.4'
+  gem 'shoulda-matchers'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml', '~> 4.0.6'
