@@ -64,7 +64,7 @@ example_app = RegisteredApplication.create!(
   )
 example_app.save!
 
-5.times do
+15.times do
   registered_application = RegisteredApplication.create!(
   name:        Faker::App.name,
   url:         Faker::Internet.url
