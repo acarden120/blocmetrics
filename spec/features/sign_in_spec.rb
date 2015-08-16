@@ -19,6 +19,7 @@ describe 'Sign in flow' do
         click_button 'Log in'
       end
 
+      expect(page).to have_css('h3', text: 'Registered Applications')
       expect(current_path).to eq registered_applications_path(user)
     end
   end
