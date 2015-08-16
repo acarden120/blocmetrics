@@ -4,7 +4,7 @@ include Devise::TestHelpers
 
 describe 'Sign in flow' do
   describe 'successful' do
-    it 'it redirects to the root path' do
+    it 'it redirects to the registered application path' do
       user = FactoryGirl.create(:user)
       visit root_path
 
@@ -19,13 +19,13 @@ describe 'Sign in flow' do
         click_button 'Log in'
       end
 
-      expect(page).to have_css('h2', text: 'Welcome to Blocmetrics')
-      expect(current_path).to eq root_path
+      expect(page).to have_css('h3', text: 'Registered Applications')
+      expect(current_path).to eq registered_applications_path(user)
     end
   end
 
   describe 'unsuccessful login' do
-    it 'it does not redirect to the root path' do
+    it 'it does not redirect to the registered application path' do
       user = FactoryGirl.create(:user)
       visit root_path
 
@@ -40,8 +40,8 @@ describe 'Sign in flow' do
         click_button 'Log in'
       end
 
-      expect(page).to_not have_css('h2', text: 'Welcome to Blocmetrics')
-      expect(current_path).to_not eq root_path
+      expect(page).to_not have_css('h3', text: 'Registered Applications')
+      expect(current_path).to_not eq registered_applications_path(user)
     end
   end
 end

@@ -1,0 +1,6 @@
+.container
+  %h3 Add new application
+  %div
+  %br
+    %b Register a new application
+    = render partial: 'form', locals: {user: @user, registered_application: @registered_application}
