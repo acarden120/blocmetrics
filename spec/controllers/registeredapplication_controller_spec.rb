@@ -5,7 +5,7 @@ include Devise::TestHelpers
 describe RegisteredApplicationsController do
   describe 'GET #index' do
     before do
-      @user = create(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
       @registered_applications = create_list(:registered_application, 10, user: @user)
       get 'index'
