@@ -1,31 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-  # Create an admin user
- admin = User.new(
-   name:     'Admin User',
-   email:    'admin2@example.com',
-   password: 'helloworld',
- )
- admin.skip_confirmation!
- admin.save!
+require 'faker'
 
-  # Create an standard test user
- admin = User.new(
-   name:     'Test User',
-   email:    'test@example.com',
-   password: 'abc123456',
- )
- admin.skip_confirmation!
- admin.save!
+testuser = User.new(
+  name:        'Test2 User2',
+  email:       'test2@example.com',
+  password:    'abc654321'
+  )
+testuser.skip_confirmation!
+testuser.save!
 
+5.times do
+  registered_application = RegisteredApplication.create!(
+  user:        testuser,
+  name:        Faker::App.name,
+  url:         Faker::Internet.url
+  )
+end
+registered_applications = RegisteredApplication.all
 
- # Create an standard test user
- admin = User.new(
-   name:     'Test2 User2',
-   email:    'test2@example.com',
-   password: 'abc654321',
- )
- admin.skip_confirmation!
- admin.save!
+20.times do 
+  event = Event.create!(
+  registered_application:        registered_applications.sample,
+  name:                          Faker::Hacker.verb
+  )
+end
+events = Event.all
+ 
+puts "Seed finished"
+puts "#{RegisteredApplication.count} applications created"
+puts "#{Event.count} events created." 
