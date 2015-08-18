@@ -17,6 +17,12 @@ class API::EventsController < ApplicationController
         render @event.errors, status: :unprocessable_entity
       end
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def set_access_control_headers
