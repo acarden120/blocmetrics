@@ -28,4 +28,18 @@ describe RegisteredApplicationsController do
       expect(assigns(:registered_application)).to match(@test_app)
     end
   end
+
+  describe 'GET #show other user' do
+    before do
+      @user = create(:user)
+      @test_app = FactoryGirl.create(:registered_application, user: @user)
+      sign_in @user
+      get :show, id: @test_app.id
+    end
+    it { should render_template('show') }
+    it 'assigns the registered application to @registered_application' do
+      expect(assigns(:registered_application)).to match(@test_app)
+    end
+  end
+
 end
