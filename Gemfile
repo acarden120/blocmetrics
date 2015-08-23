@@ -12,6 +12,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'sqlite3'
+  gem 'pry-rails', '~> 0.3.4'
 end
 group :production do
   gem 'pg'
@@ -28,3 +29,5 @@ gem 'haml', '~> 4.0.6'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'devise'
 gem 'faker'
+gem 'chartkick'
+gem 'rack-cors', '~> 0.4.0'

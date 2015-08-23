@@ -32,13 +32,12 @@ describe 'Add new application' do
   end
 
   describe 'Submit with duplicate url' do
-    it 'it redirects to the application show page' do
+    it 'it displays a flash error message' do
       fill_in 'registered_application_name', with: 'TestApp'
       fill_in 'registered_application_url', with: 'http://www.testapp.com'
       click_button 'Add'
 
       expect(current_path).to eq registered_applications_path(@user)
-      expect(page).to have_content('Register a new application')
     end
   end
 end

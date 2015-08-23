@@ -6,4 +6,9 @@
       %br
       %p= "Registered at #{@registered_application.created_at}"
       %br
+      %h3 Events
+      - @events.each do |name, evt|
+        %b= "#{name} (#{evt.size})"
+        %br
+      %br
       %p= link_to "Delete", [@registered_application], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this application?'}
