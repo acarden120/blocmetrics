@@ -12,3 +12,6 @@
         %br
       %br
       %p= link_to "Delete", [@registered_application], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this application?'}
+      %br
+      %h3 Number of events 
+      %p= pie_chart @registered_application.events.group(:name).count
