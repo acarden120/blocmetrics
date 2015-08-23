@@ -15,3 +15,5 @@
       %br
       %h3 Number of events 
       %p= pie_chart @registered_application.events.group(:name).count
+      %h3 Historical
+      %p= line_chart @registered_application.events.group_by_day(:created_at).count
