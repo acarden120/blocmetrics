@@ -4,25 +4,39 @@ class API::EventsController < ApplicationController
   before_filter :set_access_control_headers
  
   def create
+#  Rails.logger.debug 'Create started'
     registered_application = RegisteredApplication.find_by(url: request.env['HTTP_ORIGIN'])
-
+# Rails.logger.debug registered_application.inspect
     if !registered_application
       render json: "Unregistered application", status: :unprocessable_entity
     else
       @event = registered_application.events.new(event_params)
-      binding.pry
+      puts @event.inspect
+#      Rails.logger.debug @event.errors.inspect
+
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************Name: #{@event.name}****************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********event_params: #{event_params}*****************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+      puts "*********************************************************"
+
+#      binding.pry
       if @event.save
         render json: @event, status: :created
       else
+ #       binding.pry
         render @event.errors, status: :unprocessable_entity
       end
     end
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
   end
 
   def set_access_control_headers
