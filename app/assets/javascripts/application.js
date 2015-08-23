@@ -15,6 +15,8 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+//= require chartkick
+
 var blocmetrics = {};
 
 blocmetrics.report = function(eventName){
