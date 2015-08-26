@@ -35,23 +35,19 @@ describe RegisteredApplicationsController do
       @user2 = create(:user)
       @test_app = FactoryGirl.create(:registered_application, user: @user1)
       sign_in @user2
-#      get :show, id: @test_app
     end
     it 'raises an error' do
-      get :show, id: @test_app
-#      expect { }.not_to raise_error
-#      expect { render_template('show') }.to raise_error
+      expect { get :show, id: @test_app }.to raise_error(ActiveRecord::RecordNotFound)
     end
-    # it { should_not render_template('index') }
   end
 
-#  describe 'GET #show for non-logged in user' do
-#    before do
-#      @user = create(:user)
-#      @test_app = FactoryGirl.create(:registered_application, user: @user)
-#      sign_in @user2
-#      get :show, id: @test_app
-#    end
-#    it { should_not render_template('show') }
-#  end
+  describe 'GET #show for non-logged in user' do
+    before do
+      @user = create(:user)
+      @test_app = FactoryGirl.create(:registered_application, user: @user)
+    end
+    it 'raises an error' do
+      expect { get :show, id: @test_app }.to raise_error(NoMethodError)
+    end
+  end
 end
