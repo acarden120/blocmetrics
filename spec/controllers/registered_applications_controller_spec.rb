@@ -31,15 +31,27 @@ describe RegisteredApplicationsController do
 
   describe 'GET #show other user' do
     before do
-      @user = create(:user)
-      @test_app = FactoryGirl.create(:registered_application, user: @user)
-      sign_in @user
-      get :show, id: @test_app.id
+      @user1 = create(:user)
+      @user2 = create(:user)
+      @test_app = FactoryGirl.create(:registered_application, user: @user1)
+      sign_in @user2
+#      get :show, id: @test_app
     end
-    it { should render_template('show') }
-    it 'assigns the registered application to @registered_application' do
-      expect(assigns(:registered_application)).to match(@test_app)
+    it 'raises an error' do
+      get :show, id: @test_app
+#      expect { }.not_to raise_error
+#      expect { render_template('show') }.to raise_error
     end
+    # it { should_not render_template('index') }
   end
 
+#  describe 'GET #show for non-logged in user' do
+#    before do
+#      @user = create(:user)
+#      @test_app = FactoryGirl.create(:registered_application, user: @user)
+#      sign_in @user2
+#      get :show, id: @test_app
+#    end
+#    it { should_not render_template('show') }
+#  end
 end
